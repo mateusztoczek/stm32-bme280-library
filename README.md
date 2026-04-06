@@ -1,0 +1,1 @@
+Lightweight STM32 HAL/LL library for the BME280 sensor. Features near-zero delays and a flexible, hardware-independent I2C interface.
