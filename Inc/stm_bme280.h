@@ -76,6 +76,7 @@ typedef struct{
 }BME280_Init_t;
 
 
+void BME280_Assign_I2C(I2C_HandleTypeDef *hi2c);
 int BME280_Reset(uint32_t timeout_d);
 int BME280_VerifyChipId(uint32_t timeout_d);
 int BME280_SleepMode(void);

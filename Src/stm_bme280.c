@@ -10,6 +10,10 @@ static int16_t dig_H2, dig_H4, dig_H5;
 static int8_t dig_H6;
 
 
+void BME280_Assign_I2C(I2C_HandleTypeDef *hi2c) {
+    bme280_i2c_port = hi2c;
+}
+
 int BME280_Reset(uint32_t timeout_d){
 	uint8_t cmd = 0xB6;
 
@@ -56,9 +60,9 @@ int BME280_SleepMode(void){
 
 
 int BME280_Init(BME280_Init_t *BME280) {
-    if (BME280 == NULL || BME280->hi2c == NULL) return -1; 
+    if (BME280 == NULL) return -1;
+    if (bme280_i2c_port == NULL) return -1;
 
-    bme280_i2c_port = BME280->hi2c; 
     if (BME280_SleepMode() != 0) return -1;
 
     uint8_t init = (((BME280->T_StandBy & 0x07) << 5) | ((BME280->Filter & 0x07) << 2) | ((BME280->SPI_EnOrDıs & 0x01) << 0));
